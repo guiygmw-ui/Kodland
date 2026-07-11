@@ -4,27 +4,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página estilizada sobre Nicolas Cage com layout moderno e responsivo.">
     <link rel="stylesheet" href="style.css">
     <title>Projeto estilizado</title>
 </head>
 <body>
     <main class="card">
-        <section class="content">
-            <p class="eyebrow">Sobre Nicolas Cage</p>
-            <h1>Nicolas Cage</h1>
-            <p>Nicolas Cage é um ator conhecido por sua intensidade, talento e por viver personagens marcantes em filmes memoráveis.</p>
-            <h2>Quem é Nicolas Cage?</h2>
-            <ul>
-                <li>É um ator famoso por papéis dramáticos e emocionantes.</li>
-                <li>Tem um estilo único e uma presença forte na tela.</li>
-            </ul>
+        <section class="content" aria-labelledby="bio-title">
+            <div class="intro">
+                <p class="eyebrow">Biografia • Cinema</p>
+                <h1 id="bio-title">Nicolas Cage</h1>
+                <p class="lead">Nicolas Cage é um ator conhecido por sua intensidade, talento e por viver personagens marcantes em filmes memoráveis.</p>
+            </div>
+
+            <div class="info-panel">
+                <h2>Quem é Nicolas Cage?</h2>
+                <ul>
+                    <li>É um ator famoso por papéis dramáticos e emocionantes.</li>
+                    <li>Tem um estilo único e uma presença forte na tela.</li>
+                    <li>Já interpretou personagens icônicos em diversas produções.</li>
+                </ul>
+            </div>
+
+            <a class="button" href="https://pt.wikipedia.org/wiki/Nicolas_Cage" target="_blank" rel="noopener noreferrer">Saiba mais</a>
         </section>
-        <img src="https://imagenes.elpais.com/resizer/v2/LL3KKOVYQN5NFSMWTE4J3MD6ME.jpg?auth=907d287d166c88a15cbe2820526a44d26d8b926f4ae7a068a6c8376c3041b3de&width=1960&height=1470&smart=true" alt="Nicolas Cage">
+
+        <aside class="media">
+            <div class="image-wrapper">
+                <img src="https://imagenes.elpais.com/resizer/v2/LL3KKOVYQN5NFSMWTE4J3MD6ME.jpg?auth=907d287d166c88a15cbe2820526a44d26d8b926f4ae7a068a6c8376c3041b3de&width=1960&height=1470&smart=true" alt="Nicolas Cage em cena" loading="lazy">
+                <span class="image-badge">Ator premiado</span>
+            </div>
+
+            <div class="weather-card">
+                <div class="weather-header">
+                    <span>Previsão</span>
+                    <strong>Clima agora</strong>
+                </div>
+
+                <iframe src="https://www.meteoblue.com/en/weather/widget/three/ip_romania_675514?geoloc=fixed&nocurrent=0&noforecast=0&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&days=4&layout=image&user_key=f2afa8f80dfdc02c&embed_key=4db85b14b4135b2d&sig=c7ebf7c4e3acddc945f1660e34e78092e560c3015eae315324a9217b4753bd03" title="Widget de clima" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox"></iframe>
+
+                <a class="weather-link" href="https://www.meteoblue.com/en/weather/week/index" target="_blank" rel="noopener noreferrer">Ver mais no meteoblue</a>
+            </div>
+        </aside>
     </main>
 </body>
 </html>
-
 /*css*/
+:root {
+    color-scheme: light;
+    --bg-start: #f7f3ff;
+    --bg-mid: #eef7ff;
+    --bg-end: #fff8ea;
+    --text: #1f2937;
+    --muted: #60708a;
+    --primary: #7c3aed;
+    --primary-dark: #4c1d95;
+    --accent: #0f766e;
+    --card: rgba(255, 255, 255, 0.94);
+    --border: rgba(124, 58, 237, 0.16);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -38,11 +77,11 @@ body {
     justify-content: center;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
-    line-height: 1.7;
-    color: #2f3542;
+    line-height: 1.6;
+    color: var(--text);
     background:
-        radial-gradient(circle at top left, rgba(124, 58, 237, 0.18), transparent 30%),
-        linear-gradient(135deg, #f8f7ff 0%, #eef9ff 45%, #fdf8e8 100%);
+        radial-gradient(circle at top left, rgba(124, 58, 237, 0.14), transparent 32%),
+        linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
 }
 
 body::before,
@@ -52,15 +91,15 @@ body::after {
     width: 220px;
     height: 220px;
     border-radius: 50%;
-    filter: blur(20px);
-    opacity: 0.35;
+    filter: blur(24px);
+    opacity: 0.32;
     z-index: 0;
 }
 
 body::before {
     top: -60px;
     left: -40px;
-    background: #8b5cf6;
+    background: var(--primary);
 }
 
 body::after {
@@ -72,81 +111,215 @@ body::after {
 .card {
     position: relative;
     z-index: 1;
-    width: min(1000px, 100%);
+    width: min(1120px, 100%);
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
     gap: 28px;
     padding: 32px;
     border-radius: 28px;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 25px 70px rgba(15, 23, 42, 0.16);
-    backdrop-filter: blur(10px);
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.14);
+    backdrop-filter: blur(16px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 32px 80px rgba(15, 23, 42, 0.18);
 }
 
 .content {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 22px;
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .eyebrow {
-    margin: 0 0 10px;
+    margin: 0;
     font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: #7c3aed;
+    color: var(--primary);
 }
 
 h1 {
-    margin: 0 0 10px;
-    color: #2d1b69;
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    font-family: Georgia, serif;
+    margin: 0;
+    color: var(--primary-dark);
+    font-size: clamp(2rem, 3.7vw, 3rem);
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.lead {
+    margin: 0;
+    max-width: 58ch;
+    font-size: 1.05rem;
+    color: var(--muted);
+}
+
+.info-panel {
+    padding: 20px 22px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(14, 165, 233, 0.08));
+    border: 1px solid rgba(124, 58, 237, 0.14);
 }
 
 h2 {
-    margin: 16px 0 8px;
-    color: #0f766e;
-    font-size: 1.25rem;
-}
-
-p, li {
-    margin: 0;
-    color: #4b5563;
+    margin: 0 0 10px;
+    color: var(--primary-dark);
+    font-size: 1.2rem;
 }
 
 ul {
-    margin: 12px 0 0;
+    margin: 0;
     padding-left: 1.2rem;
+    display: grid;
+    gap: 8px;
 }
 
 li {
-    margin-bottom: 8px;
+    color: var(--muted);
 }
 
 li::marker {
-    color: #7c3aed;
+    color: var(--primary);
     font-size: 1rem;
+}
+
+.button {
+    align-self: flex-start;
+    padding: 12px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary), #8b5cf6);
+    box-shadow: 0 12px 24px rgba(124, 58, 237, 0.24);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button:hover,
+.button:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px rgba(124, 58, 237, 0.28);
+}
+
+.media {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.16);
 }
 
 img {
     display: block;
     width: 100%;
-    height: 100%;
-    min-height: 260px;
+    height: 280px;
     object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 16px 34px rgba(15, 23, 42, 0.2);
+    transition: transform 0.35s ease;
 }
 
-@media (max-width: 760px) {
+.image-wrapper:hover img {
+    transform: scale(1.04);
+}
+
+.image-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--primary-dark);
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 8px 16px rgba(15, 23, 42, 0.12);
+}
+
+.weather-card {
+    padding: 16px;
+    border-radius: 20px;
+    background: rgba(248, 250, 252, 0.9);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+.weather-header strong {
+    color: var(--text);
+}
+
+iframe {
+    width: 100%;
+    height: 260px;
+    border: 0;
+    border-radius: 16px;
+    background: #fff;
+}
+
+.weather-link {
+    align-self: flex-start;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.weather-link:hover,
+.weather-link:focus-visible {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+a:hover,
+a:focus-visible {
+    outline: none;
+}
+
+@media (max-width: 900px) {
     .card {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    body {
+        padding: 16px;
+    }
+
+    .card {
         padding: 22px;
     }
 
     img {
-        min-height: 220px;
+        height: 240px;
+    }
+
+    iframe {
+        height: 220px;
     }
 }
